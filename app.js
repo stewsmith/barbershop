@@ -36,13 +36,19 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+var hertz = [196, 247, 293.6];
+
 io.sockets.on('connection', function(socket) {
   socket.emit('test');
   socket.on('join', function(sessionID) {
     socket.set('sessionID', sessionID, function() {
-      if(socket.join(sessionID))
-        socket.broadcast.to(sessionID).emit('joined', io.sockets.clients(sessionID) );
-
+      if(socket.join(sessionID)) {
+        socket.broadcast.to(sessionID).emit('joined', sessionID);
+        socket.emit('tone', hertz[io.sockets.clients(sessionID).length % 3]);
+      }
     });
   });
 });
+
+// Number of people in room
+//(io.sockets.clients(sessionID).length)
