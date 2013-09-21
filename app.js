@@ -37,10 +37,12 @@ server.listen(app.get('port'), function(){
 });
 
 var hertz = [196, 247, 293.6];
+var uid = 1;
 
 io.sockets.on('connection', function(socket) {
   socket.emit('test');
   socket.on('join', function(sessionID) {
+    socket.emit('id', uid++);
     socket.set('sessionID', sessionID, function() {
       if(socket.join(sessionID)) {
         socket.broadcast.to(sessionID).emit('joined', sessionID);
@@ -50,5 +52,18 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-// Number of people in room
-//(io.sockets.clients(sessionID).length)
+io.sockets.on('toggle', function(data){
+  io.sockets.get('sessionID', function(err, sessionID){
+    if (err) {
+      console.log(err);
+    } else if (sessionID) {
+      console.log(data);
+      socket.broadcast.to(sessionID).emit('action', data);
+    } else {
+      console.log("No sessionID");
+    }
+  });
+});
+
+  // Number of people in room
+  //(io.sockets.clients(sessionID).length)
