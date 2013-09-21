@@ -3,8 +3,20 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
+    <script>
+      var socket = io.connect('/');
+      socket.on('test', function() {
+        console.log('test complete');
+      });
+      var room = '1234';
+      socket.emit('join', room);
+      socket.on('joined', function(sessionID) {
+        console.log("Someone joined room: " + sessionID);
+      });
+    </script>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>
