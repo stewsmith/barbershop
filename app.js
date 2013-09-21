@@ -50,20 +50,21 @@ io.sockets.on('connection', function(socket) {
       }
     });
   });
-});
 
-io.sockets.on('toggle', function(data){
-  io.sockets.get('sessionID', function(err, sessionID){
-    if (err) {
-      console.log(err);
-    } else if (sessionID) {
-      console.log(data);
-      socket.broadcast.to(sessionID).emit('action', data);
-    } else {
-      console.log("No sessionID");
-    }
+  socket.on('toggle', function(){
+    console.log("LUNCH");
+    socket.get('sessionID', function(err, sessionID){
+      if (err) {
+        console.log(err);
+      } else if (sessionID) {
+        console.log('toggled');
+        socket.broadcast.to(sessionID).emit('change');
+      } else {
+        console.log("No sessionID");
+      }
+    });
   });
 });
 
-  // Number of people in room
-  //(io.sockets.clients(sessionID).length)
+// Number of people in room
+//(io.sockets.clients(sessionID).length)
