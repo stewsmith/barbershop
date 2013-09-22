@@ -46,7 +46,7 @@ io.sockets.on('connection', function(socket) {
     socket.set('sessionID', sessionID, function() {
       if(socket.join(sessionID)) {
         socket.broadcast.to(sessionID).emit('joined', sessionID);
-        socket.emit('tone', hertz[io.sockets.clients(sessionID).length % 3]);
+        socket.emit('tone', hertz[uid % 3]);
       }
     });
   });

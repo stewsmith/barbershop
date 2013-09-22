@@ -33,3 +33,11 @@ function changeChord() {
   socket.emit('toggle');
   console.log("clicked button");
 }
+
+function doublePitch() {
+  tone.freq.value *= 2;
+}
+
+function halfPitch() {
+  tone.freq.value /= 2;
+}
