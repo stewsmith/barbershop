@@ -1,6 +1,7 @@
 var socket = io.connect('/');
 var uid;
 var room = '1234';
+var tone;
 
 var notes = {
   "A"  : 220,
@@ -16,8 +17,8 @@ var notes = {
   "G"  : 392
 };
 
-socket.on('test', function() {
-  console.log('test complete');
+socket.on('test', function(notes) {
+  console.log(notes);
 });
 
 socket.emit('join', room);
@@ -25,11 +26,12 @@ socket.on('joined', function(sessionID) {
   console.log("Someone joined room: " + sessionID);
 });
 
-socket.on('tone', function(note) {
-  var hz = notes[note] * 2;
-  tone = T("saw", {freq:hz, mul:0.5}).play();
-  $('#singing').append(note);
-  console.log(note);
+socket.on('tone', function(p) {
+  if (p.uid == uid) {
+    var hz = notes[p.note];
+    tone = T("saw", {freq:hz, mul:0.5}).play();
+    $('#singing').append(note);
+  }
 });
 
 socket.on('id', function(id){

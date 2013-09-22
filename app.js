@@ -52,19 +52,23 @@ io.sockets.on('connection', function(socket) {
     });
   });
 
-  socket.on('toggle', function(){
-    console.log("LUNCH");
+  socket.on('active', function(notes){
+    console.log('got', notes);
     socket.get('sessionID', function(err, sessionID){
       if (err) {
         console.log(err);
       } else if (sessionID) {
         console.log('toggled');
-        socket.broadcast.to(sessionID).emit('change');
+        for (var i = 1; i < uid; i++) {
+          notePackage = { "uid": i, "note": notes[i % notes.length] };
+          socket.broadcast.to(sessionID).emit('note', notePackage);
+        }
       } else {
         console.log("No sessionID");
       }
     });
   });
+
 });
 
 // Number of people in room
