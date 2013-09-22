@@ -36,7 +36,7 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var hertz = [196, 247, 293.6];
+var gMajor = [196, 246.9, 293.7, 370];
 var uid = 1;
 
 io.sockets.on('connection', function(socket) {
@@ -46,7 +46,7 @@ io.sockets.on('connection', function(socket) {
     socket.set('sessionID', sessionID, function() {
       if(socket.join(sessionID)) {
         socket.broadcast.to(sessionID).emit('joined', sessionID);
-        socket.emit('tone', hertz[uid % 3]);
+        socket.emit('tone', gMajor[uid % gMajor.length]);
       }
     });
   });
