@@ -12,12 +12,9 @@ var notes = {
   "D#" : 311.13,
   "E"  : 329.66,
   "F"  : 349.23,
-  "G"  : 369.99
+  "F#" : 369.99,
+  "G"  : 392
 };
-
-function setId(id){
-  uid = id;
-}
 
 socket.on('test', function() {
   console.log('test complete');
@@ -31,10 +28,12 @@ socket.on('joined', function(sessionID) {
 socket.on('tone', function(note) {
   var hz = notes[note] * 2;
   tone = T("saw", hz).bang().bang().bang().play();
+  console.log(note);
 });
 
 socket.on('id', function(id){
   console.log('id:', id)
+  uid = id;
 });
 
 socket.on('change', function() {
