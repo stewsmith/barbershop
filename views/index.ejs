@@ -5,17 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/timbre.js"></script>
+    <script src="http://zeptojs.com/zepto.min.js"></script>
     <!--    <script src="/javascripts/detectmobile.js"></script> -->
-    <script src="/javascripts/client.js"></script>
   </head>
 
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p id="singing"></p>
+    <h1 id="singing"></h1>
     <button id="button" onclick="doublePitch()">INCREASE PITCH</button>
     <button id="button" onclick="halfPitch()">DECREASE PITCH</button>
 
-    <script src="http://zeptojs.com/zepto.min.js"></script>
+    <script src="/javascripts/client.js"></script>
   </body>
 </html>

@@ -28,6 +28,7 @@ socket.on('joined', function(sessionID) {
 socket.on('tone', function(note) {
   var hz = notes[note] * 2;
   tone = T("saw", {freq:hz, mul:0.5}).play();
+  $('#singing').append(note);
   console.log(note);
 });
 
