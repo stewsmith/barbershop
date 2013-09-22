@@ -1,23 +1,46 @@
-
-Zepto(function($) {
-
-var socket = io.connect('/');
 var notes = [];
+var socket = io.connect('/');
+var room = "1234";
 
-function conductorClick(e) {
-  var activeNotes = new Array();
-  var inputNotes = document.getElementsByClassName('active');
-
-  for(var i =0; i < inputNotes.length; i++) {
-    activeNotes.push(inputNotes[i].id);
-  }
+function conductorClick() {
   socket.emit('active', notes);
 }
 
-  $('.key').on('click', function() {
-    this.setAttribute('style', 'fill:blue; stroke:black;')
-    var id = this.id;
-    notes.push(id)
+socket.emit('join', room);
+socket.on('joined', function(sessionID) {
+  console.log("Conductor joined room: " + sessionID);
+});
+
+Zepto(function($) {
+
+
+  $('rect').on('click', function() {
+    console.log(this.className.baseVal);
+    if(this.className.baseVal == 'wkey') {
+      console.log('white');
+      this.setAttribute('class', 'active-white-key');
+      this.setAttribute('style', 'fill:blue; stroke:black;')
+      var id = this.id;
+      notes.push(id);
+    }
+    else if(this.className.baseVal == 'bkey') {
+      this.setAttribute('class', 'active-black-key');
+      this.setAttribute('style', 'fill:red; stroke:black;')
+      var id = this.id;
+      notes.push(id);
+    }
+    else if (this.className.baseVal == 'active-white-key') {
+      this.setAttribute('class', 'wkey');
+      this.setAttribute('style', 'fill:white; stroke:black;')
+      var id = this.id;
+      notes.splice(notes.indexOf(id), 1);
+    }
+    else if (this.className.baseVal == 'active-black-key') {
+      this.setAttribute('class', 'bkey');
+      this.setAttribute('style', 'fill:black; stroke:black;')
+      var id = this.id;
+      notes.splice(notes.indexOf(id), 1);
+    }
   });
 
 });

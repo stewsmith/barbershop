@@ -17,20 +17,18 @@ var notes = {
   "G"  : 392
 };
 
-socket.on('test', function(notes) {
-  console.log(notes);
-});
 
 socket.emit('join', room);
 socket.on('joined', function(sessionID) {
   console.log("Someone joined room: " + sessionID);
 });
 
-socket.on('tone', function(p) {
+socket.on('note', function(p) {
   if (p.uid == uid) {
-    var hz = notes[p.note];
+    var hz = notes[p.note.toUpperCase()];
+    console.log(hz);
     tone = T("saw", {freq:hz, mul:0.5}).play();
-    $('#singing').append(note);
+    $('#singing').append(p.note.toUpperCase());
   }
 });
 
