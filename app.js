@@ -37,7 +37,7 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var gMajor = [196, 246.9, 293.7, 370];
+var gMajor = ['G','B','D', 'F#'];
 var uid = 1;
 
 io.sockets.on('connection', function(socket) {

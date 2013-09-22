@@ -9,10 +9,10 @@ var notes = {
   "C"  : 261.63,
   "C#" : 277.18,
   "D"  : 293.66,
-  "D#" :311.13,
-  "E"  :329.66,
-  "F"  :349.23,
-  "G"  :369.99
+  "D#" : 311.13,
+  "E"  : 329.66,
+  "F"  : 349.23,
+  "G"  : 369.99
 };
 
 function setId(id){
@@ -30,7 +30,7 @@ socket.on('joined', function(sessionID) {
 
 socket.on('tone', function(note) {
   var hz = notes[note] * 2;
-  tone = T("sin", hz).play();
+  tone = T("saw", hz).bang().bang().bang().play();
 });
 
 socket.on('id', function(id){
