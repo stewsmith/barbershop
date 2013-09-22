@@ -27,7 +27,7 @@ socket.on('joined', function(sessionID) {
 
 socket.on('tone', function(note) {
   var hz = notes[note] * 2;
-  tone = T("saw", hz).bang().bang().bang().play();
+  tone = T("saw", {freq:hz, mul:0.5}).play();
   console.log(note);
 });
 
