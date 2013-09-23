@@ -3,7 +3,8 @@ var socket = io.connect('/');
 var room = "1234";
 
 function conductorClick() {
-  socket.emit('active', notes);
+  if (notes.length > 0)
+    socket.emit('active', notes);
 }
 
 socket.emit('join', room);

@@ -4,17 +4,18 @@ var room = '1234';
 var tone;
 
 var notes = {
-  "A"  : 220,
+  "A"       : 220,
   "A-sharp" : 233.08,
-  "B-sharp"  : 246.94,
-  "C-sharp"  : 261.63,
+  "B"       : 246.94,
+  "C"       : 261.63,
   "C-sharp" : 277.18,
-  "D-sharp"  : 293.66,
+  "D"       : 293.66,
   "D-sharp" : 311.13,
-  "E-sharp"  : 329.66,
-  "F-sharp"  : 349.23,
+  "E-sharp" : 329.66,
+  "F"       : 349.23,
   "F-sharp" : 369.99,
-  "G-sharp"  : 392
+  "G"       : 392,
+  "G-sharp" : 415.3
 };
 
 
