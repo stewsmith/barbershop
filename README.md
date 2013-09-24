@@ -1,6 +1,4 @@
 barbershop
 ==========
-TODO:
-Make rooms  
-frontend  
-Fix ammend notes in client
+TODO:  
+https://trello.com/b/FMzMTK2e/barbershop
