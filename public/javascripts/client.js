@@ -4,18 +4,18 @@ var room = '1234';
 var tone;
 
 var notes = {
-  "A"       : 220,
-  "A-sharp" : 233.08,
-  "B"       : 246.94,
-  "C"       : 261.63,
-  "C-sharp" : 277.18,
-  "D"       : 293.66,
-  "D-sharp" : 311.13,
-  "E-sharp" : 329.66,
-  "F"       : 349.23,
-  "F-sharp" : 369.99,
-  "G"       : 392,
-  "G-sharp" : 415.3
+  "a"       : 220,
+  "a-sharp" : 233.08,
+  "b"       : 246.94,
+  "c"       : 261.63,
+  "c-sharp" : 277.18,
+  "d"       : 293.66,
+  "d-sharp" : 311.13,
+  "e-sharp" : 329.66,
+  "f"       : 349.23,
+  "f-sharp" : 369.99,
+  "g"       : 392,
+  "g-sharp" : 415.3
 };
 
 
@@ -26,10 +26,10 @@ socket.on('joined', function(sessionID) {
 
 socket.on('note', function(p) {
   if (p.uid == uid) {
-    var hz = notes[p.note.toUpperCase()];
+    var hz = notes[p.note];
     console.log(hz);
-    tone = T("saw", {freq:hz, mul:0.5}).play();
-    $('#singing').append(p.note.toUpperCase());
+    tone = T("saw", {'freq':hz, 'mul':0.5}).play();
+    $('#singing').text("LOUD AND PROUD: " + p.note.toUpperCase());
   }
 });
 
@@ -38,10 +38,6 @@ socket.on('id', function(id){
   uid = id;
 });
 
-socket.on('change', function() {
-  console.log('got new tone doubling frequencies')
-  tone.freq.value *= 2;
-});
 
 function changeChord() {
   socket.emit('toggle');
