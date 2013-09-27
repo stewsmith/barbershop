@@ -4,9 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'ChoirBoy' });
 };
 
 exports.conductor= function(req, res){
-  res.render('conductor', { title: 'Express' });
+  res.render('conductor', { title: 'ChoirBoy' });
 };

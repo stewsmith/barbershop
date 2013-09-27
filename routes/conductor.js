@@ -4,5 +4,5 @@
  */
 
 exports.conductor= function(req, res){
-  res.render('conductor', { title: 'Express' });
+  res.render('conductor', { title: 'ChoirBoy - YOU IN CHARGE!' });
 };
